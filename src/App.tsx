@@ -1,24 +1,18 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom'
-import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
-import PetsPage from './components/PetsPage';
 import SignInPage from './components/SignInPage';
 import { ToastContainer } from 'react-bootstrap';
 import 'react-toastify/dist/ReactToastify.css';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import BackendAPI from './backendApi/BackendAPI';
-import { showErrorToast, showSuccessToast } from './components/ToastNotification';
+import { showSuccessToast } from './components/ToastNotification';
 import { AdminModel } from './Models/TypeModels';
 import SignUpPage from './components/SignUpPage';
 
 function App() {
-  type token = {
-    type: string,
-    value: string
-  }
+
 
   const navigate = useNavigate();
   const [admin, setAdmin] = useState<AdminModel | {}>({})
@@ -33,6 +27,11 @@ function App() {
             type: res.data.token_type,
             value: res.data.access_token
           }
+          setAdmin({
+            id:res.data.id,
+            name:res.data.name,
+            email:res.data.email
+          })
           localStorage.setItem("userToken", JSON.stringify(userToken))
           navigate("/success");
         } else {
