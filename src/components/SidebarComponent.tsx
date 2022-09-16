@@ -24,7 +24,7 @@ const SidebarComponent = ({ sidebarMenus, activeKey, onItemSelect,admin }: Props
         <p className="text-success">ADMIN</p>
         <div
           className="user-photo"
-          style={{ backgroundImage: `url('${ProfilePic}')` }}
+          style={{ backgroundImage: `url('${(admin as AdminModel).photo}')` }}
         />
         <p className="my-3 text-black-50">John Doe</p>
         <hr />

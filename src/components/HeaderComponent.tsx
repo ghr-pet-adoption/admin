@@ -7,6 +7,7 @@ type Props = {
 };
 
 const HeaderComponent = ({admin}: Props) => {
+  admin = admin as AdminModel;
   return (
     <Navbar
       fixed="top"
@@ -16,16 +17,7 @@ const HeaderComponent = ({admin}: Props) => {
     >
       <Container fluid>
         <div className="ms-4">
-          {/* <div className="search-input-group">
-            <i className="search-icon bx bx-search"></i>
-            <Form.Control
-              className="border-0 bg-light"
-              placeholder="Search something..."
-              type="text"
-            />
-          </div> */}
 
-          {/* <img src={LogoImage} className="img-fluid" alt="" /> */}
           <div className="d-flex">
             <Image fluid src={LogoImage} width="45" />
             <span className="ms-2 mb-0 p-0 align-self-center"><small>God's Home Of Refuge</small></span>

@@ -10,14 +10,16 @@ import BackendAPI from './backendApi/BackendAPI';
 import { showSuccessToast } from './components/ToastNotification';
 import { AdminModel } from './Models/TypeModels';
 import SignUpPage from './components/SignUpPage';
+import PreloaderComponent from './components/PreloaderComponent';
 
 function App() {
-
+  const [showPreloader, setShowPreloader] = useState(false)
 
   const navigate = useNavigate();
   const [admin, setAdmin] = useState<AdminModel | {}>({})
 
   const onLogin = (email: string, password: string) => {
+    setShowPreloader(true)
     BackendAPI.admin.login({ email, password })
       .then((res) => {
         if (res.status === 200) {
@@ -27,10 +29,12 @@ function App() {
             type: res.data.token_type,
             value: res.data.access_token
           }
+          console.log("admin: ", res)
           setAdmin({
-            id:res.data.id,
-            name:res.data.name,
-            email:res.data.email
+            id:res.data.account.id,
+            name:res.data.account.name,
+            email:res.data.account.email,
+            photo:res.data.account.photo
           })
           localStorage.setItem("userToken", JSON.stringify(userToken))
           navigate("/success");
@@ -39,6 +43,7 @@ function App() {
           showSuccessToast("Invalid login credentials!");
           alert("Invalid login credentials!")
         }
+        setShowPreloader(false)
       })
   }
   const onSignUp = (admin:AdminModel) =>{
@@ -53,7 +58,7 @@ function App() {
         <Route path='/signup' element={<SignUpPage onSignUp={onSignUp} />} />
         <Route path="/success/*" element={<HomePage admin={admin} />} />
       </Routes>
-
+    <PreloaderComponent show={showPreloader}/>
     </div>
   );
 }
