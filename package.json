@@ -1,6 +1,6 @@
 {
   "name": "God's Home Of Refuge Admin",
-  "homepage": "http://ghr-pet-adoption/admin",
+  "homepage": "https://pet-adoption-app-admin.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
