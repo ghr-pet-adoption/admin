@@ -6,6 +6,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 axios.defaults.baseURL = 'https://ghr-api.herokuapp.com/api/';
 
@@ -16,6 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter basename='/admin'>
+    
       <App />
     </BrowserRouter>
   </React.StrictMode>

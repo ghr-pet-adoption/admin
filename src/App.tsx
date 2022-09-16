@@ -3,14 +3,13 @@ import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import HomePage from './components/HomePage';
 import SignInPage from './components/SignInPage';
-import { ToastContainer } from 'react-bootstrap';
-import 'react-toastify/dist/ReactToastify.css';
 import { AxiosResponse } from 'axios';
 import BackendAPI from './backendApi/BackendAPI';
-import { showSuccessToast } from './components/ToastNotification';
+import { showErrorToast, showSuccessToast } from './components/ToastNotification';
 import { AdminModel } from './Models/TypeModels';
 import SignUpPage from './components/SignUpPage';
 import PreloaderComponent from './components/PreloaderComponent';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [showPreloader, setShowPreloader] = useState(false)
@@ -40,8 +39,7 @@ function App() {
           navigate("/success");
         } else {
           console.log(res)
-          showSuccessToast("Invalid login credentials!");
-          alert("Invalid login credentials!")
+          showErrorToast("Invalid login credentials!");
         }
         setShowPreloader(false)
       })
